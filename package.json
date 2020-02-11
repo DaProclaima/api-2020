@@ -26,9 +26,11 @@
   },
   "scripts": {
     "build": "yarn install && eslint ./app/* index.js && yarn start",
-    "start": "eslint ./app/* index.js && node index.js",
+    "start": "mongod --dbpath=/Users/user/data/db && eslint ./app/* index.js && node index.js",
     "test": "mocha",
-    "lint": "eslint ./app/* index.js"
+    "lint": "eslint ./app/* index.js",
+    "pmstt": "pm2 start process.json",
+    "pmstp": "pm2 stop process.json"
   },
   "repository": {
     "type": "git",

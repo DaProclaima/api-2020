@@ -1,13 +1,15 @@
-const users = require('../../models/')
+const User = require('../../models/user')
 const check = require('../users/payload-validator/update.js')
 const validator = require('node-validator')
+
 /**
  * Update
  * @Class
  */
 class Update {
-  constructor (app) {
+  constructor (app, connect) {
     this.app = app
+    this.UserModel = connect.model('User', User)
 
     this.run()
   }
@@ -20,15 +22,12 @@ class Update {
       try {
         const { id } = req.params
         const { body } = req
-        const user = users.find(user => user.id === id) || false
-
+        const user = this.UserModel.find(id)
         if (!user) {
           res.status(200).json({})
-
-          return
+        } else {
+          res.status(200).json(Object.assign({}, user, body))
         }
-
-        res.status(200).json(Object.assign({}, user, body))
       } catch (err) {
         res.status(500).json({
           'code': 500,

@@ -1,4 +1,4 @@
-let users = [
+module.exports = [
   {
     'id': '0',
     'first_name': 'Sébastien',
@@ -180,4 +180,3 @@ let users = [
     'image_profil': 'https://randomuser.me/api/portraits/women/15.jpg'
   }
 ]
-module.exports = users

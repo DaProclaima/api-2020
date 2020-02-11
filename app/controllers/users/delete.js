@@ -1,12 +1,15 @@
-const users = require('../../models/index.js')
-
+const User = require('../../models/user')
+const check = require('./payload-validator/delete.js')
+const validator = require('node-validator')
 /**
  * Delete
  * @Class
  */
 class Delete {
-  constructor (app) {
+  constructor (app, connect) {
     this.app = app
+    this.UserModel = connect.model('User', User)
+
     this.run()
   }
 
@@ -14,10 +17,17 @@ class Delete {
    * middleWare
    */
   middleware () {
-    this.app.delete('/users/delete/:id', (req, res) => {
+    this.app.delete('/users/delete/:id', validator.express(check), (req, res) => {
       try {
         const { id } = req.params
-        res.status(200).json(users.map(user => user.id === id ? false : user))
+        this.UserModel.find(id).remove(() => {
+          return res.status(200).json({'message': `${id} deleted`}) || {}
+        }).catch(err => {
+          res.status(500).json({
+            'code': 500,
+            'message': err
+          })
+        })
       } catch (err) {
         res.status(500).json({
           'code': 500,

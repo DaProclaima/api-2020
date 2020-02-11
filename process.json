@@ -2,11 +2,9 @@
   "apps": [{
     "name": "api-2020",
     "script": "./index.js",
-    "args": ["production"],
     "exec_mode": "cluster",
     "instances": 4,
     "watch": "../",
     "log_date_format": "YYYY-MM-DD HH:mm Z"
   }]
 }
-
