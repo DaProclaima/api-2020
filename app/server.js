@@ -1,5 +1,6 @@
 const express = require('express')
 const routes = require('./controllers/routes.js')
+const bodyParser = require('body-parser')
 
 /**
  * Server
@@ -8,6 +9,14 @@ const routes = require('./controllers/routes.js')
 class Server {
   constructor () {
     this.app = express()
+  }
+
+  /**
+   * middleware
+   */
+  middleware () {
+    this.app.use(bodyParser.urlencoded({ 'extended': true }))
+    this.app.use(bodyParser.json())
   }
 
   /**
@@ -31,6 +40,7 @@ class Server {
    * Run
    */
   run () {
+    this.middleware()
     this.routes()
     this.app.listen(3000)
   }

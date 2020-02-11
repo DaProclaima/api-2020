@@ -4,7 +4,7 @@ module.exports = _.isObject()
   .withOptional('first_name', _.isString())
   .withOptional('last_name', _.isString())
   .withOptional('email', _.isString({
-    regex: /^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/,
+    regex: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     message: 'Invalid email'
   }))
   .withOptional('password', _.isString())

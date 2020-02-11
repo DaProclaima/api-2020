@@ -1,6 +1,6 @@
-const users = require('../../models/index.js')
-const udpate = require('../users/payload-validator/update.js')
-const check = require('node-validator')
+const users = require('../../models/')
+const check = require('../users/payload-validator/update.js')
+const validator = require('node-validator')
 /**
  * Update
  * @Class
@@ -8,6 +8,7 @@ const check = require('node-validator')
 class Update {
   constructor (app) {
     this.app = app
+
     this.run()
   }
 
@@ -15,7 +16,7 @@ class Update {
    * middleWare
    */
   middleware () {
-    this.app.post('/users/update/:id', (req, res) => {
+    this.app.put('/users/update/:id', validator.express(check), (req, res) => {
       try {
         const { id } = req.params
         const { body } = req
