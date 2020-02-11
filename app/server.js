@@ -17,6 +17,7 @@ class Server {
     new routes.users.Create(this.app)
     new routes.users.Show(this.app)
     new routes.users.Delete(this.app)
+    new routes.users.Update(this.app)
 
     this.app.use((req, res) => {
       res.status(404).json({
