@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const Schema = new mongoose.Schema({
-  country: String,
   city: String,
   gender: String,
   first_name: String,
@@ -16,7 +15,7 @@ const Schema = new mongoose.Schema({
   street_type: String,
   street_name: String,
   phone: String,
-  image_profil: {
+  image_profile: {
     type: String,
     default: 'https://placehold.it/64x64'
   }

@@ -25,12 +25,13 @@
     "mocha": "5.2.0"
   },
   "scripts": {
-    "build": "yarn install && eslint ./app/* index.js && yarn start",
-    "start": "mongod --dbpath=/Users/user/data/db && eslint ./app/* index.js && node index.js",
+    "mongodb": "mongod --dbpath=/Users/user/data/db",
+    "build": "yarn install && eslint ./app/* ./test/* index.js && yarn start",
+    "start": "eslint ./app/* ./test/* index.js && node index.js",
     "test": "mocha",
-    "lint": "eslint ./app/* index.js",
+    "lint": "eslint ./app/* ./test/* index.js",
     "pmstt": "pm2 start process.json",
-    "pmstp": "pm2 stop process.json"
+    "pmstp": "pm2 delete api-2020"
   },
   "repository": {
     "type": "git",

@@ -26,7 +26,7 @@ class Server {
         this.connect = this.dbConnect(host)
       }, 5000)
 
-      console.error(`'[ERROR] api dbConnect() -> ${err}`)
+      console.error(`[ERROR] api dbConnect() -> ${err}`)
     })
 
     connect.on('disconnected', () => {

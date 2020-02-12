@@ -18,16 +18,19 @@ class Update {
    * middleWare
    */
   middleware () {
-    this.app.put('/users/update/:id', validator.express(check), (req, res) => {
+    this.app.put('/user/update/:id', validator.express(check), (req, res) => {
       try {
         const { id } = req.params
         const { body } = req
-        const user = this.UserModel.find(id)
-        if (!user) {
-          res.status(200).json({})
-        } else {
-          res.status(200).json(Object.assign({}, user, body))
-        }
+        
+        this.UserModel.findByIdAndUpdate(id, body).then((user) => {
+          res.status(200).json(user || {})
+        }).catch(err => {
+          res.status(500).json({
+            'code': 500,
+            'message': err
+          })
+        })
       } catch (err) {
         res.status(500).json({
           'code': 500,

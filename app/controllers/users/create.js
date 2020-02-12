@@ -18,9 +18,10 @@ class Create {
    * middleWare
    */
   middleware () {
-    this.app.post('/users/create', validator.express(check), (req, res) => {
+    this.app.post('/user/create', validator.express(check), (req, res) => {
       try {
         const userModel = new this.UserModel(req.body)
+
         userModel.save().then(user => {
           res.status(200).json(user || {})
         }).catch(err => {

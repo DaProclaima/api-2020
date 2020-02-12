@@ -16,7 +16,7 @@ class Show {
    * middleWare
    */
   middleware () {
-    this.app.get('/users/show/:id', (req, res) => {
+    this.app.get('/user/show/:id', (req, res) => {
       try {
         const { id } = req.params
 
