@@ -1,4 +1,4 @@
-/* eslint-env node, mocha */
+/*eslint-env node, mocha */
 
 // Depedencies
 const chai = require('chai')
@@ -21,15 +21,23 @@ let userCreate
  * GET /user
  */
 describe('/user', () => {
+  it('GET /create should and 404 error', (done) => {
+    const result = '{"code":404,"message":"Not found in API"}'
+
+    chai.request(app)
+      .post('/user/notexist')
+      .end((err, res) => {
+        res.should.have.status(404)
+
+        JSON.stringify(JSON.parse(res.text)).should.be.eql(result)
+
+        done()
+      })
+  })
+
   it('POST /create should create an user', (done) => {
-    const result = {
-
-    }
-
-    const payload = {
-      'email': 'sebastien.nobour@gmail.com',
-      'password': '123456789'
-    }
+    const result = '{"image_profil":"https://placehold.it/64x64","email":"cyril@gmail.com","password":"123456789"}'
+    const payload = { "email": "cyril@gmail.com", "password": "123456789" }
 
     chai.request(app)
       .post('/user/create')
@@ -37,7 +45,9 @@ describe('/user', () => {
       .end((err, res) => {
         res.should.have.status(200)
 
-        const response = JSON.parse(JSON.stringify(response))
+        const response = JSON.parse(res.text)
+
+        userCreate = JSON.parse(JSON.stringify(response))
 
         delete response.id
 
