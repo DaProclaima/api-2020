@@ -18,7 +18,6 @@ class Delete {
     this.app.delete('/user/delete/:id', (req, res) => {
       try {
         const { id } = req.params
-        let obj = this.UserModel.findById(id)
         this.UserModel.findByIdAndDelete(id, user => {
           return res.status(200).json(user)
         }).catch(err => {
