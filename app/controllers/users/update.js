@@ -23,8 +23,10 @@ class Update {
         const { id } = req.params
         const { body } = req
         
-        this.UserModel.findByIdAndUpdate(id, body).then((user) => {
-          res.status(200).json(user || {})
+        this.UserModel.findByIdAndUpdate(id, body).then(user => {
+          this.UserModel.findById(user.id, () => {
+            res.status(200).json(user || {})
+          })  
         }).catch(err => {
           res.status(500).json({
             'code': 500,
