@@ -51,12 +51,30 @@ class JWT {
     }
   }
 
-  saveToken(){
+  /**
+  * Save token
+  * @param {string} token
+  */
+  saveToken(token) {
+    if(process.env.TOKENS) {
+      const tokens =  process.env.TOKENS.split(',')
 
+      tokens.push(token)
+
+      return
+    }
+
+    process.env.TOKENS = token
   }
 
-  getToken(){
-    // get the same token. if not exists send error
+  getToken(tokenSource) {
+    const tokens = process.env.TOKENS.split(',')
+    return tokens.fitler(token => token === tokenSource ? token : false)[0] || false
+  }
+
+  verify(tokenSource) {
+    return new Promise((resolve, reject) => {
+      getToken(tokenSource) ? resolve(true) : reject(false)
   }
 }
 

@@ -6,4 +6,9 @@ const user = {
   email: 'sebastien@gmail.com'
 }
 
-console.log(jwt.JWTgenerator(user))
+// console.log(jwt.JWTgenerator(user))
+
+const token = jwt.JWTgenerator(user)
+
+jwt.saveToken(token.signature)
+console.log(jwt.getToken)
